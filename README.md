@@ -1,1 +1,1 @@
-### 32-Bit Dadda Multiplier in Verilog HDL
+# 32-Bit Dadda Multiplier in Verilog HDL
