@@ -1,2 +1,5 @@
 # Simulation binaries
 *.vvp
+
+# Logs
+log/
