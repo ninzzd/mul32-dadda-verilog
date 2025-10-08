@@ -6,3 +6,6 @@
 
 # Waveform Dumpfiles
 *.vcd
+
+# Quartus Temporary Files
+*.bak

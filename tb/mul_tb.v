@@ -1,3 +1,6 @@
+// Author: Ninaad Desai
+// Description: 32-bit dadda multiplier testbench
+// TODO: Make it better, signed/unsigned logic at result seems weird
 `timescale 1ns/1ps
 module mul_tb();
     reg mode;

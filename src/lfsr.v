@@ -15,7 +15,7 @@ module lfsr #(parameter N = 32)(
     assign q = dff;
     generate
         for(i = 0;i < N;i = i+1)
-        begin
+        begin: xorgen
             if(i == 0)
                 assign xors[i] = mask[i]&dff[i];
             else
