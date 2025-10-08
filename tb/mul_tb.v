@@ -33,7 +33,7 @@ module mul_tb();
     integer log;
     initial
     begin
-        log = $fopen("mul_tb_log.csv","w");
+        log = $fopen("log/mul_tb_log.csv","w");
         #1.000
         forever
         begin
