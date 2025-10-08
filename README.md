@@ -12,3 +12,7 @@ mkdir -p log/
 iverilog -o mul_tb.vvp tb/mul_tb.v src/*.v
 vvp mul_tb.vvp
 ```
+To visualize the waveforms of various wires, run:
+```bash
+gtkwave mul_tb.vcd
+```

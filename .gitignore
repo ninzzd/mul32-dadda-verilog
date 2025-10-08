@@ -1,5 +1,8 @@
 # Simulation binaries
 *.vvp
 
-# Logs
-log/
+# Logs (CSV format used for logs)
+*.csv
+
+# Waveform Dumpfiles
+*.vcd
