@@ -55,18 +55,22 @@ module mul32 #(parameter T = 0.000)(
     generate
         // Stage 0: Partial-products generation
         for(w = 0;w <= 62;w = w+1)
-        begin
+        begin: ppg
             if(w < 32)
             begin
                 for(j = 0;j <= w;j = j+1)
+					 begin: ppg1
                     assign #(T) s0[w][j] = a__[w-j]&b__[j];
+					 end
                 // for(k = w+1;k < N;k = k+1)
                 //     assign s0[w][k] = 1'b0;
             end
             else
             begin
                 for(j = 0;j < 63 - w;j = j+1)
+					 begin: ppg2
                     assign #(T) s0[w][j] = a__[31-j]&b__[w+j+1-32];
+					 end
                 // for(k = 2*N-w;k < N;k = k+1)
                 //     assign s0[w][k] = 1'b0;
             end
@@ -74,7 +78,7 @@ module mul32 #(parameter T = 0.000)(
         // Stage 1
         // Max depth: 28 (27:0)
         for(w = 0;w <= 62;w = w+1)
-        begin
+        begin: sl1
             case(w)
                 28:
                 begin
@@ -139,7 +143,7 @@ module mul32 #(parameter T = 0.000)(
         // Stage 2
         // Max depth: 19 (18:0)
         for(w = 0;w <= 62;w = w+1)
-        begin
+        begin: sl2
             case(w)
                 19:
                 begin
@@ -333,7 +337,7 @@ module mul32 #(parameter T = 0.000)(
         // Stage 3 (Error could be here)
         // Max depth: 13 (12:0)
         for(w = 0;w <= 62;w = w+1)
-        begin
+        begin: sl3
             case(w)
                 13:
                 begin
@@ -449,7 +453,7 @@ module mul32 #(parameter T = 0.000)(
         // Stage 4
         // Max depth: 9 (8:0)
         for(w = 0;w <= 62;w = w+1)
-        begin
+        begin: sl4
             case(w)
                 9:
                 begin
@@ -523,7 +527,7 @@ module mul32 #(parameter T = 0.000)(
         // Stage 5
         // Max depth: 6 (5:0)
         for(w = 0;w <= 62;w = w+1)
-        begin
+        begin: sl5
             case(w)
                 6:
                 begin 
@@ -578,7 +582,7 @@ module mul32 #(parameter T = 0.000)(
         // Stage 6
         // Max depth: 4 (3:0)
         for(w = 0;w <= 62;w = w+1)
-        begin
+        begin: sl6
             case(w)
                 4:
                 begin 
@@ -617,7 +621,7 @@ module mul32 #(parameter T = 0.000)(
         // Stage 7
         // Max depth: 3 (2:0)
         for(w = 0;w <= 62;w = w+1)
-        begin
+        begin: sl7
             case(w)
                 3:
                 begin 
@@ -643,7 +647,7 @@ module mul32 #(parameter T = 0.000)(
         // Stage 8
         // Max depth: 2 (1:0)
         for(w = 0;w <= 62;w = w+1)
-        begin
+        begin: sl8
             case(w)
                 2:
                 begin 
