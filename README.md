@@ -8,10 +8,10 @@ This repository contains the hardware design for a 32-bit integer multiplier cir
 ## Get Started
 The testbench tests the multiplier on various signed/unsigned operands and generates a CSV log file containing columns of operands, expected and obtained results, and error flags. To run the testbench:
 ```bash
-iverilog -o mul_tb.vvp tb/mul_tb.v src/*.v
-vvp mul_tb.vvp
+iverilog -o mul32_tb.vvp tb/mul32_tb.v src/*.v
+vvp mul32_tb.vvp
 ```
 To visualize the waveforms of various wires, run:
 ```bash
-gtkwave mul_tb.vcd
+gtkwave mul32_tb.vcd
 ```

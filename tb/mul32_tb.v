@@ -36,7 +36,7 @@ module mul32_tb();
     integer log;
     initial
     begin
-        log = $fopen("mul_tb_log.csv","w");
+        log = $fopen("mul32_tb_log.csv","w");
         #1.000
         forever
         begin
@@ -54,8 +54,8 @@ module mul32_tb();
     end
     initial
     begin
-        $dumpfile("mul_tb.vcd");
-        $dumpvars(0,mul_tb);
+        $dumpfile("mul32_tb.vcd");
+        $dumpvars(0,mul32_tb);
         $timeformat(-9,2," ns",6);
         #0.500
         $fwrite(log,"Time,Mode,a,b,exp_res,res,eq\n");
