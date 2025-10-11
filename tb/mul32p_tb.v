@@ -6,10 +6,13 @@ module mul32p_tb();
     reg clk;
     reg signed [31:0] a;
     reg signed [31:0] b;
+    wire signed [31:0] a_;
+    wire signed [31:0] b_;
     wire eq_u;
     wire eq;
-    wire [31:0] a_;
-    wire [31:0] b_;
+    wire mode_;
+    wire [31:0] a_u;
+    wire [31:0] b_u;
     wire signed [63:0] res_signed;
     wire [63:0] res_unsigned;
     wire signed [63:0] exp_res_signed;
@@ -24,15 +27,18 @@ module mul32p_tb();
         .lo(res_signed[31:0]),
         .hi(res_signed[63:32])
     );
-    assign a_ = a;
-    assign b_ = b;
-    assign exp_res_signed = a*b;
-    assign exp_res_unsigned = a_*b_;
+    buffer #(.W(65),.L(8)) buff(
+        .clk(clk),
+        .in({a,b,mode}),
+        .out({a_,b_,mode_})
+    );
+    assign a_u = a_;
+    assign b_u = b_;
+    assign exp_res_signed = a_*b_;
+    assign exp_res_unsigned = a_u*b_u;
     assign res_unsigned = res_signed;
     assign eq = (exp_res_signed == res_signed) ? 1'b1 : 1'b0;
     assign eq_u = (exp_res_unsigned == res_unsigned) ? 1'b1 : 1'b0;
-    // task display;
-    // endtask
     integer w;
     integer i;
     integer log;
@@ -43,14 +49,14 @@ module mul32p_tb();
         forever
         begin
             #1.000
-            if(mode == 1'b1)
+            if(mode_ == 1'b1)
             begin
                 //          
-                $fwrite(log,"%0t,%0b,%0d,%0d,%0d,%0d,%0b\n",$realtime,mode,a,b,exp_res_signed,res_signed,eq);
+                $fwrite(log,"%0t,%0b,%0d,%0d,%0d,%0d,%0b\n",$realtime,mode_,a_,b_,exp_res_signed,res_signed,eq);
             end
             else
             begin
-                $fwrite(log,"%0t,%0b,%0d,%0d,%0d,%0d,%0b\n",$realtime,mode,a_,b_,exp_res_unsigned,res_unsigned,eq_u);
+                $fwrite(log,"%0t,%0b,%0d,%0d,%0d,%0d,%0b\n",$realtime,mode_,a_u,b_u,exp_res_unsigned,res_unsigned,eq_u);
             end
         end
     end
