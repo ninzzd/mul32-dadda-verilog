@@ -19,7 +19,7 @@ module mul32p_tb();
     wire [63:0] exp_res_unsigned;
 
     always #0.500 clk = ~clk;
-    mul32p #(.T(0.050)) uut(
+    mul32p #(.T(0.000)) uut(
         .clk(clk),
         .a(a),
         .b(b),

@@ -717,7 +717,7 @@ module mul32p #(parameter T = 0.000)(
     add32 #(.T(T)) add2(
         .a(lo__),
         .b(32'h00000000),
-        .c_1(prod_comp),
+        .c_1(prod_comp_),
         .s(lo),
         .c31(c_)
     );
