@@ -41,7 +41,15 @@ module mul_tb();
         forever
         begin
             #0.500
-            $fwrite(log,"%0t,%0b,%0d,%0d,%0d,%0d,%0b,%0d,%0d,%0d,%0d,%0b\n",$realtime,mode,a_,b_,exp_res_unsigned,res_unsigned,eq_u,a,b,exp_res_signed,res_signed,eq);
+            if(mode == 1'b1)
+            begin
+                //          
+                $fwrite(log,"%0t,%0b,%0d,%0d,%0d,%0d,%0b\n",$realtime,mode,a,b,exp_res_signed,res_signed,eq);
+            end
+            else
+            begin
+                $fwrite(log,"%0t,%0b,%0d,%0d,%0d,%0d,%0b\n",$realtime,mode,a_,b_,exp_res_unsigned,res_unsigned,eq_u);
+            end
         end
     end
     initial
@@ -50,7 +58,7 @@ module mul_tb();
         $dumpvars(0,mul_tb);
         $timeformat(-9,2," ns",6);
         #0.500
-        $fwrite(log,"Time,Mode,a_u,b_u,exp_res_u,res_u,eq_u,a,b,exp_res,res,eq\n");
+        $fwrite(log,"Time,Mode,a,b,exp_res,res,eq\n");
         #0.499
         mode <= 0;
         a <= 292;

@@ -3,7 +3,7 @@
 module mul32 #(parameter T = 0.000)(
     input [31:0] a,
     input [31:0] b,
-    input mode,
+    input mode, // 0 - unsigned, 1 - signed
     output [31:0] hi,
     output [31:0] lo
 );

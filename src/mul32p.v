@@ -75,7 +75,6 @@ module mul32p #(parameter T = 0.000)(
             d5[i] <= s5[i];
             d6[i] <= s6[i];
             d7[i] <= s7[i];
-            d8[i] <= s8[i];
         end
     end
     generate
@@ -492,7 +491,7 @@ module mul32p #(parameter T = 0.000)(
                     // fa - 1, ha - 1
                     fa #(.T(T)) fa1(.i(d3[w][2:0]),.o({s4[w+1][0],s4[w][1]}));
                     ha #(.T(T)) ha2(.i(d3[w][4:3]),.o({s4[w+1][1],s4[w][2]}));
-                    assign s4[w][8:3] = sd[w][10:5];
+                    assign s4[w][8:3] = d3[w][10:5];
                 end
                 11:
                 begin
