@@ -1,4 +1,4 @@
-module mul_tb_qhw(
+module mul32_tb_qhw(
 	input clk,
 	output [63:0] res,
 	output [63:0] exp_res, // Unsigned interpretation of signed OR unsigned multiplication 

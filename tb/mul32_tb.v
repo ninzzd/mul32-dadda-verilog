@@ -2,7 +2,7 @@
 // Description: 32-bit dadda multiplier testbench
 // TODO: Make it better, signed/unsigned logic at result seems weird
 `timescale 1ns/1ps
-module mul_tb();
+module mul32_tb();
     reg mode;
     reg signed [31:0] a;
     reg signed [31:0] b;
