@@ -12,6 +12,7 @@ module mul32p #(parameter T = 0.000)(
     wire c;
     wire c_;
     wire prod_comp;
+    wire prod_comp_;
     wire a_comp;
     wire b_comp;
     wire [31:0] a_;
@@ -49,8 +50,8 @@ module mul32p #(parameter T = 0.000)(
     assign a_ = a^{32{a_comp}};
     assign b_ = b^{32{b_comp}};
     assign prod_comp = mode&(a[31]^b[31]); // Generated in Stage 0
-    assign lo__ = lo_^{32{prod_comp}}; // Used in Stage 8/9 (Not buffered)
-    assign hi__ = hi_^{32{prod_comp}};
+    assign lo__ = lo_^{32{prod_comp_}}; // Used in Stage 8 (Not buffered)
+    assign hi__ = hi_^{32{prod_comp_}};
     add32 #(.T(T)) add1_a(
         .a(a_),
         .b(32'h00000000),
@@ -62,6 +63,11 @@ module mul32p #(parameter T = 0.000)(
         .b(32'h00000000),
         .c_1(b_comp),
         .s(b__)
+    );
+    buffer #(.W(1),.L(8)) prod_comp_buff(
+        .clk(clk),
+        .in(prod_comp),
+        .out(prod_comp_)
     );
     always @(posedge clk)
     begin
