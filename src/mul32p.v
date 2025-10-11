@@ -48,8 +48,8 @@ module mul32p #(parameter T = 0.000)(
     assign b_comp = mode&b[31];
     assign a_ = a^{32{a_comp}};
     assign b_ = b^{32{b_comp}};
-    assign prod_comp = mode&(a[31]^b[31]);
-    assign lo__ = lo_^{32{prod_comp}};
+    assign prod_comp = mode&(a[31]^b[31]); // Generated in Stage 0
+    assign lo__ = lo_^{32{prod_comp}}; // Used in Stage 8/9 (Not buffered)
     assign hi__ = hi_^{32{prod_comp}};
     add32 #(.T(T)) add1_a(
         .a(a_),
