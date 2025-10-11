@@ -1,3 +1,5 @@
+// Author: Ninaad Desai
+// Description: 32-bit dadda multiplier circuit with parameterized gate delay for simulations
 module mul32 #(parameter T = 0.000)(
     input [31:0] a,
     input [31:0] b,

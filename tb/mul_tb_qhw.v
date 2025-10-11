@@ -1,7 +1,7 @@
 module mul_tb_qhw(
 	input clk,
-	output [31:0] res,
-	output [31:0] exp_res, // Unsigned interpretation of signed OR unsigned multiplication 
+	output [63:0] res,
+	output [63:0] exp_res, // Unsigned interpretation of signed OR unsigned multiplication 
 	output err
 );
 	reg clk_;
