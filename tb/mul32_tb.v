@@ -1,6 +1,5 @@
 // Author: Ninaad Desai
 // Description: 32-bit dadda multiplier testbench
-// TODO: Make it better, signed/unsigned logic at result seems weird
 `timescale 1ns/1ps
 module mul32_tb();
     reg mode;
@@ -69,32 +68,6 @@ module mul32_tb();
         b <= 32'h6C3F8132;
         #5.000
         mode <= 1;
-        // ----- Stage-wise debugging -----
-        // $write("\n");
-        // for(w = 63;w >= 0;w = w-1)
-        // begin
-        //     if(w == 63)
-        //     begin
-        //         $write("   ");
-        //     end
-        //     else
-        //     $write("%02d ",w);
-        // end
-        // $write("\n");
-        // for(i = 0; i < 32; i = i+1)
-        // begin
-        //     for(w = 63;w >= 0;w = w-1)
-        //     begin
-        //         if(w == 63)
-        //         begin
-        //             $write("%2d ",i);
-        //         end
-        //         else
-        //         $write("%2b ",uut.s5[w][i]);
-        //     end
-        //     $write("\n");
-        // end
-        // --------------------------------
         #5.000
         $fclose(log);
         $finish;
