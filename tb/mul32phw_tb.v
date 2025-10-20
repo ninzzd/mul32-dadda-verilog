@@ -2,11 +2,11 @@
 module mul32phw_tb;
     reg clk;
     reg rst;
-    wire err;
+    wire [31:0] err_count;
     mul32phw uut(
         .clk(clk),
         .rst(rst),
-        .err(err)
+        .err_count(err_count)
     );
     always #1.0 clk <= ~clk;
     initial 

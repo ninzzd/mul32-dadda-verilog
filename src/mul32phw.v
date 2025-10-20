@@ -4,10 +4,11 @@
 module mul32phw(
     input clk,
     input rst,
-    output err 
+    output reg [31:0] err_count
 );
 	reg clk_;
 	wire mode;
+    wire err;
 	wire signed [31:0] a;
 	wire signed [31:0] b;
 	wire [31:0] au;
@@ -52,10 +53,14 @@ module mul32phw(
 	initial 
 	begin
 		clk_ <= 1'b0;
-		
+		err_count <= 32'h0000_0000;
 	end
 	always @(posedge clk)
 	begin
+        if(err == 1'b1)
+        begin
+            err_count <= err_count + 1;
+        end
 		clk_ <= ~clk_;
     end
 endmodule
