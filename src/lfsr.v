@@ -17,10 +17,10 @@ module lfsr #(parameter N = 32)(
         for(i = 0;i < N;i = i+1)
         begin: xorgen
             if(i == 0)
-                assign xors[i] = mask[i]&dff[i];
+                assign xors[i] = mask_[i]&dff[i];
             else
             begin
-                assign xors[i] = xors[i-1]^(mask[i]&dff[i]);
+                assign xors[i] = xors[i-1]^(mask_[i]&dff[i]);
             end 
         end
     endgenerate
