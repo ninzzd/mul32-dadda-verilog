@@ -6,6 +6,8 @@ module mul32phw(
     input rst,
     output reg [31:0] err_count
 );
+    reg [3:0] init_count;
+    reg init_flag;
 	reg clk_;
 	wire mode;
     wire err;
@@ -54,13 +56,32 @@ module mul32phw(
 	begin
 		clk_ <= 1'b0;
 		err_count <= 32'h0000_0000;
+        init_count <= 3'b000;
+        init_flag <= 1'b0;
 	end
 	always @(posedge clk)
 	begin
-        if(err == 1'b1)
+        if(~rst)
         begin
-            err_count <= err_count + 1;
+            if(init_flag == 1'b0)
+            begin
+                if(init_count == 3'b111)
+                begin
+                    init_flag <= 1'b1;
+                end
+                else
+                begin
+                    init_count <= init_count + 3'b001;
+                end
+            end
+            else
+            begin
+                if(err == 1'b1)
+                begin
+                    err_count <= err_count + 32'h0000_0001;
+                end
+            end
         end
-		clk_ <= ~clk_;
+        clk_ <= ~clk_;
     end
 endmodule
