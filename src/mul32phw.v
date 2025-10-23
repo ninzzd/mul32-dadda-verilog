@@ -27,7 +27,7 @@ module mul32phw(
 	
 	lfsr #(.N(32)) lfsr_a(.clk(clk_),.rst(rst),.seed(seed_a),.mask(mask_a),.q(au));
 	lfsr #(.N(32)) lfsr_b(.clk(clk_),.rst(rst),.seed(seed_b),.mask(mask_b),.q(bu));
-    buffer #(.W(64),.L(8)) buff32 (
+    buffer #(.W(64),.L(8)) buff64 (
         .clk(clk),
         .in(exp_res),
         .out(exp_res_buff)
