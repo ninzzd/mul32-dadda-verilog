@@ -17,7 +17,7 @@ module mul32phw_tb;
         rst <= 1'b1;
         #2.0
         rst <= 1'b0;
-        #100.0;
+        #500.0;
         $finish;
     end
 endmodule
