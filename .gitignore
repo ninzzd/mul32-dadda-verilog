@@ -9,3 +9,6 @@
 
 # Quartus Temporary Files
 *.bak
+
+# C compiled binaries
+*.out
