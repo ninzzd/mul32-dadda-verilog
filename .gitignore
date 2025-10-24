@@ -12,3 +12,6 @@
 
 # C compiled binaries
 *.out
+
+# Generate memory initialization files
+*.mif

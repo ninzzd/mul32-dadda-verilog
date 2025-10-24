@@ -35,7 +35,9 @@ END;
 */
 int main(){
     FILE *f;
-    int n = 16;
+    int n;
+    printf("Enter n (power of 2): \n");
+    scanf("%d",&n);
     int m = n/2;
     f = fopen("res.mif","w");
     fprintf(f,"DEPTH = %d;\n",n);
