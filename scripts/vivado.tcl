@@ -9,19 +9,15 @@ set proj_dir  [file normalize [file join $cwd "${proj_name}-vivado"]]
 set part_name "xc7a100tcsg324-1"
 set board_part "digilentinc.com:nexys-a7-100t:part0:1.2"
 
-# Start the Vivado GUI
-start_gui
-
 # Check if project exists, open it if it does.
 set proj_xpr  [file normalize [file join $proj_dir "${proj_name}.xpr"]]
 if {[file exists $proj_xpr]} {
     puts "INFO: Opening existing project: $proj_xpr"
     open_project $proj_xpr
 } else {
-    puts "INFO: Creating new project in: $proj_dir"
-    
-    # Create the project
     file mkdir $proj_dir
+    puts "INFO: Creating new project in: $proj_dir"
+    # Create the project
     create_project $proj_name $proj_dir -part $part_name
     
     # Set the board property now that it's manually installed
@@ -48,7 +44,6 @@ if {[file exists $proj_xpr]} {
     } else {
         puts "WARNING: Testbench directory '$tb_dir' not found."
     }
-
-    # Save the project
-    save_project
+    # Start the Vivado GUI
+    start_gui
 }

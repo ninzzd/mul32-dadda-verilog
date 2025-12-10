@@ -19,8 +19,8 @@ gtkwave mul32_tb.vcd
 ```
 
 ### Vivado
-Run the TCL script file in the script/ directory directory to generate a Vivado project with all the design and simulation sources addid from this repository:
+Run the TCL script file in the script/ directory directory to generate a Vivado project with all the design and simulation sources added from this repository. The TCL script selects the Digilent Nexys A7 FPGA board, but this can be changed in the TCL file before running it. Here's the command to run the TCL script:
 ```bash
-vivado -mode tcl -source scripts/vivado.tcl
+vivado -mode gui -source scripts/vivado.tcl
 ```
 
