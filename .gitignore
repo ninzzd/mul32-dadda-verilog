@@ -15,3 +15,11 @@
 
 # Generate memory initialization files
 *.mif
+
+# Vivado project files
+*-vivado/
+*.xpr
+
+# Vivado log files
+*.log
+*.jou
