@@ -23,3 +23,6 @@
 # Vivado log files
 *.log
 *.jou
+
+# Vivado temporary files
+*.str
