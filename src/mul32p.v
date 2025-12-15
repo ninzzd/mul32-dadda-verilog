@@ -1,10 +1,17 @@
 // Author: Ninaad Desai
 // Description: 32-bit dadda multiplier circuit with parameterized gate delay for simulations
+
+// Instructions:
+// [rd is either hi or lo, rs1 is a, rs2 is b]
+// 1. mul rd rs1 rs2 [rd = lo, rs1 = a, rs2 = b, signed or unsigned doesn't matter (mode = 0)]
+// 2. mulh rd rs2 rs2 [rd = hi, rs2 = a, rs2 = b, signed (mode = 1)]
+// 3. mulhu rd rs2 rs2 [rd = hi, rs2 = a, rs2 = b, unsigned (mode = 0)]
+// 4. mulhsu rd rs2 rs2 [rd = hi, rs2 = a, rs2 = b, signed a, unsigned b] (to be worked on)
 module mul32p #(parameter T = 0.000)(
-    input [31:0] a,
-    input [31:0] b,
+    input [31:0] a, // Multiplicand
+    input [31:0] b, // Multiplier
     input clk,
-    input mode,
+    input mode, // 0 - unsigned, 1 - signed
     output [31:0] hi,
     output [31:0] lo
 );
