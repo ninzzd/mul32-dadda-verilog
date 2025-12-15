@@ -74,15 +74,15 @@ module mul32p_tb();
             // end
             if(mode_ == 2'b00) // uu
             begin
-                $fwrite(log,"%0t,%0b,%0d,%0d,%0d,%0d,%0b\n",$realtime,mode_,a_u,b_u,exp_res_uu,res,eq_uu);
+                $fwrite(log,"%3t,%2b,%0d,%0d,%0d,%0d,%0b\n",$realtime,mode_,a_u,b_u,exp_res_uu,res,eq_uu);
             end
             else if(mode_ == 2'b01) // ss
             begin
-                $fwrite(log,"%0t,%0b,%0d,%0d,%0d,%0d,%0b\n",$realtime,mode_,a_,b_,exp_res_ss,res_s,eq_ss);
+                $fwrite(log,"%3t,%2b,%0d,%0d,%0d,%0d,%0b\n",$realtime,mode_,a_,b_,exp_res_ss,res_s,eq_ss);
             end
             else if(mode_ == 2'b10) // su
             begin
-                $fwrite(log,"%0t,%0b,%0d,%0d,%0d,%0d,%0b\n",$realtime,mode_,a_,b_,exp_res_su,res_s,eq_su);
+                $fwrite(log,"%3t,%2b,%0d,%0d,%0d,%0d,%0b\n",$realtime,mode_,a_,b_,exp_res_su,res_s,eq_su);
             end
         end
     end
@@ -103,7 +103,7 @@ module mul32p_tb();
         b <= 87654321;
         #2.000
         mode <= 2'b10;
-        a <= -20000000;
+        a <= 32'h7AAAAAAA;
         b <= -1;
         #20.000
         $fclose(log);
