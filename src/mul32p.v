@@ -3,15 +3,15 @@
 
 // Instructions:
 // [rd is either hi or lo, rs1 is a, rs2 is b]
-// 1. mul rd rs1 rs2 [rd = lo, rs1 = a, rs2 = b, signed or unsigned doesn't matter (mode = 0)]
-// 2. mulh rd rs2 rs2 [rd = hi, rs2 = a, rs2 = b, signed (mode = 1)]
-// 3. mulhu rd rs2 rs2 [rd = hi, rs2 = a, rs2 = b, unsigned (mode = 0)]
-// 4. mulhsu rd rs2 rs2 [rd = hi, rs2 = a, rs2 = b, signed a, unsigned b] (to be worked on)
+// 1. mul rd rs1 rs2 [rd = lo, rs1 = a, rs2 = b, signed or unsigned doesn't matter (by default, mode = 00)]
+// 2. mulh rd rs2 rs2 [rd = hi, rs2 = a, rs2 = b, signed (mode = 01)]
+// 3. mulhu rd rs2 rs2 [rd = hi, rs2 = a, rs2 = b, unsigned (mode = 00)]
+// 4. mulhsu rd rs2 rs2 [rd = hi, rs2 = a, rs2 = b, signed a, unsigned b (mode = 10)]
 module mul32p #(parameter T = 0.000)(
     input [31:0] a, // Multiplicand
     input [31:0] b, // Multiplier
     input clk,
-    input mode, // 0 - unsigned, 1 - signed
+    input [1:0] mode, // 00 - unsigned, 01 - signed, 10 - signed a unsigned b
     output [31:0] hi,
     output [31:0] lo
 );
@@ -20,12 +20,14 @@ module mul32p #(parameter T = 0.000)(
     wire c_;
     wire prod_comp;
     wire prod_comp_;
-    wire a_comp;
-    wire b_comp;
-    wire [31:0] a_;
-    wire [31:0] b_;
-    wire [31:0] a__;
-    wire [31:0] b__;
+    wire a_mode; // Whether a should be considered as signed or unsigned
+    wire b_mode; // Whether b should be considered as signed or unsigned
+    wire a_comp; // Whether a needs to be complemented based on a_mode and a[31]
+    wire b_comp; // Whether b needs to be complemented based on b_mode and b[31]
+    wire [31:0] a_; // 1s compliment of a if a_comp is 1
+    wire [31:0] b_; // 1s compliment of b if b_comp is 1
+    wire [31:0] a__; // 2s compliment of a if a_comp is 1
+    wire [31:0] b__; // 2s compliment of b if b_comp is 1
     wire [31:0] lo_;
     wire [31:0] hi_;
     wire [31:0] lo__;
@@ -52,11 +54,13 @@ module mul32p #(parameter T = 0.000)(
     genvar j;
     genvar k;
 
-    assign a_comp = mode&a[31];
-    assign b_comp = mode&b[31];
+    assign a_mode = mode[1] | mode[0]; // 1 if a is signed
+    assign b_mode = mode[0]; // 1 if b is signed
+    assign a_comp = a_mode&a[31]; // if a is signed and negative
+    assign b_comp = b_mode&b[31]; // if b is signed and negative
     assign a_ = a^{32{a_comp}};
     assign b_ = b^{32{b_comp}};
-    assign prod_comp = mode&(a[31]^b[31]); // Generated in Stage 0
+    assign prod_comp = a_comp^b_comp;
     assign lo__ = lo_^{32{prod_comp_}}; // Used in Stage 8 (Not buffered)
     assign hi__ = hi_^{32{prod_comp_}};
     add32 #(.T(T)) add1_a(
