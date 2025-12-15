@@ -104,7 +104,7 @@ module mul32p_tb();
         #2.000
         mode <= 2'b10;
         a <= -20000000;
-        b <= -30000000;
+        b <= -1;
         #20.000
         $fclose(log);
         $finish;
