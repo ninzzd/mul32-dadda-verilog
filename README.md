@@ -9,6 +9,7 @@ This repository contains the hardware design for a 32-bit integer multiplier cir
 
 ### Icarus Verilog
 The testbench tests the multiplier on various signed/unsigned operands and generates a CSV log file containing columns of operands, expected and obtained results, and error flags. To run the testbench:
+1. Without pipelining:
 ```bash
 iverilog -o mul32_tb.vvp tb/mul32_tb.v src/*.v
 vvp mul32_tb.vvp
@@ -16,6 +17,15 @@ vvp mul32_tb.vvp
 To visualize the waveforms of various wires, run:
 ```bash
 gtkwave mul32_tb.vcd
+```
+2. With pipelining:
+```bash
+iverilog -o mul32p_tb.vvp tb/mul32p_tb.v src/*.v
+vvp mul32p_tb.vvp
+```
+To visualize the waveforms of various wires, run:
+```bash
+gtkwave mul32p_tb.vcd
 ```
 
 ### Vivado
