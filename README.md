@@ -6,6 +6,8 @@
 
 ## Overview
 This repository contains the hardware design for a 32-bit integer multiplier circuit written in Verilog HDL, using the dadda tree reduction algorithm. This architecture is usually seen in DSP slices, multiplier circuits in general-purpose CPUs and FPGA soft processors. The dadda-tree multiplier is much faster than booth's and shift-add multipliers, while also consuming lesser area and power than wallace-tree and array multipliers, making it a good choice for FPGA soft processors and embedded systems by respecting the constrained available resources while delivering good performance.
+
+For detailed documentation on this project, refer to this page: [32-Bit-Dadda-Tree-Multiplier-Notion](https://www.notion.so/32-Bit-Dadda-Tree-Multiplier-24fb0894758d806a9006c27139d0cc2c?source=copy_link)
 ### Demonstration
 Given below is an animation that vizualizes each stage of the uniform reduction of partial products tree using the dadda multiplier.
 ![Demo](doc/dadda-reduction.gif)
